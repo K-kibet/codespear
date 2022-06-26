@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Courasel } from '../components/Courasel';
-import Src from '../assets/download.png';
-import Src1 from '../assets/download (1).png'
 import { Newsletter } from '../components/Newsletter';
+import { Featured } from '../components/Featured';
+import Bg from '../assets/home.svg';
+import { CoursesComp } from '../components/CoursesComp';
 
 const Container = styled.div`
     width: 100%;
@@ -11,32 +12,19 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 100px;
+    flex-direction: column;
     padding-top: 10px;
-`
-const CourseContainer = styled.div`
-  width: 90%;
-  height: 400px;
-  display: flex;
-  flex-wrap: wrap;
-`
-const Course = styled.div`
-  width: calc((100% - 250px) / 4);
-  height: calc((100% - 30px) / 2);
-  margin: 10px 10px;
+    background-image: url(${Bg});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 `
 
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: fill;
-  object-position: center;
-  margin: 10px 10px;
-`
 export const Home = () => {
   return (
     <Container>
+      <CoursesComp />
+      <Featured />
       <Newsletter />
     </Container>
   )

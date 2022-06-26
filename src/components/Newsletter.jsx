@@ -48,15 +48,10 @@ const Input = styled.input`
 `
 
 const Button = styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: 0;
-    background: #ff5e14;
+    background: #2dc245;
     padding: 13px 20px;
-    border: 1px solid #ff5e14;
-    top: 0;
+    border: none;
+    cursor: pointer;
 `
 
 export const Newsletter = () => {
@@ -65,7 +60,7 @@ export const Newsletter = () => {
         <Title>Subscribe</Title>
         <Text>Don’t miss to subscribe to our new feeds, kindly fill the form below.</Text>
         <InputContainer>
-          <Input />
+          <Input type="email" placeholder="example@gmail.com"/>
           <Button>
             <Send style={{
               color: '#fff',

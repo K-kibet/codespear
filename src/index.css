@@ -11,3 +11,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.link{
+  width: inherit;
+  text-decoration: none;
+  color: inherit;
+  text-align: inherit;
+  padding: inherit;
+  cursor: pointer;
+}

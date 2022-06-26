@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 const Container = styled.div`
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     background-color: black;
 `
 
@@ -23,49 +23,55 @@ const Title = styled.h1`
 `
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  margin: 0 auto;
   padding: 20px;
   position: relative;
-  max-width: 840px;
   @media screen and (max-width: 850px) {
-    display: flex;
     flex-direction: column;
   }
 `
 
 const Form = styled.form`
-  /*float: left;*/
-  max-width: 400px;
+  width: 450px;
   font-family: 'Lato';
   font-weight: 400;
-  @media screen and (max-width: 850px) {
-    margin: 0 auto;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 30px;
   @media screen and (max-width: 569px) {
-    float: none;
-    margin: 0 auto;
+   width: 90%;
   }
 `
 
 const Input = styled.input`
-  max-width: 400px;
-  background-color: #000;
+
+  width: 400px;
+  height: 35px;
+  background-color: #3b3b3b;
+  border: none;
   color: #fff;
   letter-spacing: 1px; 
+  margin-bottom: 20px;
+  padding: 0 5px;
+  outline: none;
   @media screen and (max-width: 569px) {
-    margin: 0 auto;
+    width: 280px;
   }
 `
 
 const Text = styled.textarea`
-  max-width: 400px;
-  background-color: #000;
+  width: 400px;
+  min-height: 200px;
+  background-color: #3b3b3b;
+  margin-bottom: 20px;
   color: #fff;
   letter-spacing: 1px;
+  padding: 0 5px;
+  outline: none;
   @media screen and (max-width: 569px) {
-    margin: 0 auto;
+
     width: 280px;
   }
 `
@@ -73,57 +79,60 @@ const Text = styled.textarea`
 const Button = styled.button`
   margin-top: 15px;
   height: 34px;
-  width: 400px;
+  width: 160px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #575656;
   overflow: hidden;
   transition: all .2s ease-in-out;
+  cursor: pointer;
   @media screen and (max-width: 410px) {
-    width: 99%;
+    width: 70%;
   }
 `
 
 const ContactContainer = styled.div`
-  max-width: 400px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   @media screen and (max-width: 850px) {
     margin: 0 auto;
     margin-top: 60px;
     max-width: 300px;
   }
   @media screen and (max-width: 569px) {
-    float: none;
-    margin: 0 auto;
-    margin-top: 60px;
-    max-width: 280px;
+    width: 80%;
   }
 `
 
 const ContactList = styled.ul`
+  width: 90%;
   list-style-type: none;
   margin-left: -30px;
   padding-right: 20px;
+  margin-bottom: 20px;
 
 `
 
 const ContactItem = styled.li`
+width: 100%;
   line-height: 4;
   color: #aaa;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
   @media screen and (max-width: 850px) {
-    height: 60px;
-    width: 60px;
     line-height: 60px;
     &::after{
-        width: 60px;
-        height: 60px;
         line-height: 60px;
     }
   }
   @media screen and (max-width: 569px) {
-    height: 55px;
-    width: 55px;
     line-height: 55px;
     font-size: 2rem;
     &::after{
-        width: 55px;
-        height: 55px;
         line-height: 55px;
     }
   }
@@ -150,22 +159,23 @@ const ContactText = styled.div`
 `
 
 const SocialIcons = styled.ul`
-  position: relative;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: 22px;
   text-align: center;
   width: 100%;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 0;
-  @media screen and (max-width: 850px) {
-    left: 0;
-  }
 `
 const SocialIcon = styled.li`
   position: relative; 
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 60px;
   width: 60px;
-  margin: 10px 3px;
   line-height: 60px;
   border-radius: 50%;
   color: #fff;
@@ -203,12 +213,14 @@ const SocialIcon = styled.li`
 `
 const Break = styled.hr`
     border-color: rgba(255,255,255,.6);
+    width: 90%;
 `
 const Copyright = styled.div`
   font: 200 14px 'Oswald', sans-serif;
   color: #555;
   letter-spacing: 1px;
   text-align: center;
+  margin-top: 20px;
 `
 export const Contact = () => {
   return (
@@ -219,7 +231,7 @@ export const Contact = () => {
           <Input type="text"  placeholder="NAME" value="" required />
           <Input type="email"  placeholder="EMAIL" value="" required />
           <Text placeholder="MESSAGE" required/>
-          <Button type="submit" value="SEND"/>
+          <Button type="submit" >SEND</Button>
         </Form>
         <ContactContainer>
           <ContactList>
@@ -240,15 +252,25 @@ export const Contact = () => {
           <SocialIcons>
             <SocialIcon>
               <a href=''><Facebook /></a>
+            </SocialIcon>
+            <SocialIcon>
               <a href=""><Twitter /></a>
+            </SocialIcon>
+            <SocialIcon>
               <a href=""><Instagram /></a>
+            </SocialIcon>
+            <SocialIcon>
               <a href=""><GitHub /></a>
+            </SocialIcon>
+            <SocialIcon>
               <a href=""><YouTube /></a>
+            </SocialIcon>
+            <SocialIcon>
               <a href=""><Pinterest /></a>
             </SocialIcon>
           </SocialIcons>
           <Break />
-          <Copyright>&copy; ALL OF THE RIGHTS RESERVED</Copyright>
+          <Copyright>&copy; ALL RIGHTS RESERVED</Copyright>
         </ContactContainer>
       </Wrapper>
     </Container>

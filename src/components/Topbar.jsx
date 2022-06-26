@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Image from '../assets/icon.png';
 import UserImage from '../assets/person.png';
+import { Outlet, Link } from "react-router-dom";
 
 const Container = styled.div`
     width: 100%;
@@ -36,7 +37,7 @@ const SearchContainer = styled.div`
     justify-content: space-between;
     background-color: white;
     padding: 5px 0px;
-    border-radius: 20px;
+    border-radius: 10px;
     overflow: hidden;
 `
 
@@ -58,14 +59,16 @@ const Navigation = styled.div`
 const Item = styled.div`
   margin-left: 20px;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color:hsl(51.1,50%, 95%);
+  transition:all 250ms ease-out;
   cursor: pointer;
   &:hover{
-    text-shadow: 5px 5px 12px #5d83c0, -5px -5px 12px #5d83c0;
-    text-decoration: 1px solid #5d83c0 underline;
+    transform: scale(1.05);
+    text-shadow: 5px 5px 2.3px #89388e;
     
   }
 
@@ -104,7 +107,7 @@ const Button = styled.button`
 `
 
 export const Topbar = () => {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   return (
     <Container>
       <Icon src={Image}/>
@@ -118,21 +121,20 @@ export const Topbar = () => {
         }}/>
       </SearchContainer>
       <Navigation>
-        <Item>Home</Item>
-        <Item>Courses</Item>
-        <Item>About</Item>
-        <Item>Contact</Item>
+        
+        <Item><Link to='/' className='link'>Home</Link></Item>
+        <Item><Link to='/courses' className='link'>Courses</Link></Item>
+        <Item><Link to='/about' className='link'>About</Link></Item>
+        <Item><Link to='/contact' className='link'>Contact</Link></Item>
       </Navigation>
       
         {user && <User src={UserImage}/>}
         {!user && <UserContainer>
-            <Button bg='teal'>LOGIN</Button>
-            <Button bg='black'>REGISTER</Button>
+            <Button bg='teal'><Link to='/login' className='link' >LOGIN</Link></Button>
+            <Button bg='black'><Link to='/register' className='link' >REGISTER</Link></Button>
           </UserContainer>
         }
-        
-      
-
+      <Outlet />
     </Container>
   )
 }

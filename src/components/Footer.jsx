@@ -1,6 +1,7 @@
 import { Facebook, Instagram, LinkedIn, Pinterest, Twitter, YouTube } from '@mui/icons-material';
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
     width: 100%;
@@ -40,13 +41,15 @@ const Navigation = styled.ul`
 `
 
 const Item = styled.li`
-    width: 100%;
+    width: 90%;
     padding: 5px 5px;
     margin-bottom: 5px;
     list-style: none;
     &:hover{
+        cursor: pointer;
         background-color: #b4b4b4;
     }
+
 `
 const FooterBottom = styled.div`
     width: 100%;
@@ -79,64 +82,82 @@ export const Footer = (props) => {
         <Wrapper>
             <Title>Codespear</Title>
             <Break />
-            <Text>About the company, little discription will goes here..</Text>
+            <Text>About the company, little discription goes here..</Text>
         </Wrapper>
         <Wrapper>
             <Title>Quick Links</Title>
             <Break />
             <Navigation>
-                <Item>Get Started</Item>
-                <Item>Success Stories</Item>
-                <Item>About</Item>
-                <Item >Contact</Item>
+                <Item><Link className='link' to='/register'> Get Started</Link></Item>
+                <Item><Link className='link' to='/about'>Success Stories</Link></Item>
+                <Item><Link className='link' to='/about'>About</Link></Item>
+                <Item ><Link className='link' to='/contact'>Contact</Link></Item>
             </Navigation>
         </Wrapper>
         <Wrapper>
             <Title>Codespear</Title>
             <Break />
             <Navigation>
-                <Item>Home</Item>
-                <Item>Front-end development</Item>
-                <Item>FAQ</Item>
+                <Item><Link className='link' to='/'>Home</Link></Item>
+                <Item><Link className='link' to='/'>Front-end development</Link></Item>
+                <Item><Link className='link' to='/about'>FAQ</Link></Item>
             </Navigation>
         </Wrapper>
         <Wrapper>
             <Title>Contact us</Title>
             <Break />
             <Navigation style={{flexDirection: 'row'}}>
-                <Facebook style={{
-                    cursor: 'pointer',
-                    color: '#4267B2'
-                }}/>
-                <Twitter style={{
-                    cursor: 'pointer',
-                    color: '#1DA1F2'
-                }}/>
+                <Link className='link' to='/'>
+                    <Facebook style={{
+                        cursor: 'pointer',
+                        color: '#4267B2'
+                    }}/>
+                </Link>
                 
-                <Instagram style={{
-                    cursor: 'pointer',
-                    color: '#C13584'
-                }}/>
-                <Pinterest style={{
-                    cursor: 'pointer',
-                    color: '#E60023'
-                }}/>
-                <LinkedIn style={{
-                    cursor: 'pointer',
-                    color: '#0e76a8'
-                }}/>
-                <YouTube style={{
-                    cursor: 'pointer',
-                    color: '#c4302b'
-                }}/>
+                <Link className='link' to='/'>
+                    <Twitter style={{
+                        cursor: 'pointer',
+                        color: '#1DA1F2'
+                   }}/>
+                </Link>
+                
+                <Link className='link' to='/'>
+                    <Instagram style={{
+                        cursor: 'pointer',
+                        color: '#C13584'
+                    }}/>
+                </Link>
+                
+                
+                <Link className='link' to='/'>
+                    <Pinterest style={{
+                        cursor: 'pointer',
+                        color: '#E60023'
+                    }}/>
+                </Link>
+                
+                <Link className='link' to='/'>
+                    <LinkedIn style={{
+                        cursor: 'pointer',
+                        color: '#0e76a8'
+                    }}/>
+                </Link>
+                
+                <Link className='link' to='/'>
+                    <YouTube style={{
+                       cursor: 'pointer',
+                       color: '#c4302b'
+                    }}/>
+                </Link>
+                
                 
             </Navigation>
         </Wrapper>
 
         <FooterBottom>
             <Text>&copy;2022</Text>
-            <Text>Terms of use</Text>
-            <Text>Privacy Policy</Text>
+            <Text><Link className='link' to='/'>Terms of use</Link></Text>
+            <Text><Link className='link' to='/'>Privacy Policy</Link></Text>
         </FooterBottom>
 
     </Container>

@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Facebook, GitHub, Instagram, LinkedIn, Reddit, Telegram, Twitter, YouTube} from '@mui/icons-material';
 import Bg from '../assets/blob.svg'
+import { Newsletter } from '../components/Newsletter';
 
 const Container = styled.div`
-    width: 95%;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,10 +30,10 @@ const Title = styled.h3`
 const Description = styled.div`
     width: 90%;
     border: 1px solid teal;
-    height: 200px;
+
     font-family: fantasy;
     padding: 10px 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,7 +47,7 @@ const Description = styled.div`
 
 const IconContainer = styled.div`
     width: 80%;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     display: flex;
     align-content: center;
     justify-content: space-between;
@@ -71,8 +72,11 @@ export const About = () => {
     <Container>
         <Title>LEARN WITH CODESHERE</Title>
         <Description>
-            Technology has become part and parcel of our modern lifestyle. <br />
-            Learn fundamental skill to become a software developer and create <br />
+            
+            The world is expanding digitally and with every aspect of our lives 
+            becoming digital, the demand for computer experts is skyrocketing each day. 
+            Therefore, having knowledge of programming languages has become crucial for every IT professional <br />
+            Learn fundamental skill to become a software developer and create.
             software programs that are marketable to over 2 billion people today.
         </Description>
         <Span>Connect with us</Span>
@@ -86,6 +90,7 @@ export const About = () => {
             <Reddit />
             <Telegram />
         </IconContainer>
+        <Newsletter />
     </Container>
   )
 }
