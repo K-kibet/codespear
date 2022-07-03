@@ -1,7 +1,9 @@
 import { Google, Facebook, GitHub } from '@mui/icons-material';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Bg from '../assets/login.svg';
+import { signIn } from '../firebase';
 
 const Container = styled.div`
     position: relative;
@@ -104,10 +106,25 @@ const Button = styled.button`
     }
 `
 export const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleLogin = (e) => {
+    e.preventDefault();
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(email && password) {
+      if(email.match(mailformat)){
+        signIn(email, password);
+      } else {
+        alert("You have entered an invalid email address!");
+      }
+      
+    } else return;
+    
+  }
   return (
     <Container>
-            <Form>
-                <Title>Welcome Bac</Title>
+            <Form onSubmit={handleLogin}>
+                <Title>Welcome Back</Title>
                 <IconContainer>
                   <Google />
                   <Facebook />
@@ -116,13 +133,12 @@ export const Login = () => {
                 <Span>
                   OR
                 </Span>
-                <Input type="text" placeholder="Name"/>
-                <Input type="text" placeholder="Email"/>
-                <Input type="password" placeholder="Password"/>
+                <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 <Button type='submit'>SIGN IN</Button>
             </Form>
             <Span>
-              Already registered? Login <FormLink>here</FormLink>
+              Already registered? Login <FormLink><Link to='/register' className='login'>here</Link></FormLink>
             </Span>
     </Container>
   )

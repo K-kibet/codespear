@@ -4,11 +4,12 @@ import { CoursesInfo } from '../courses';
 
 const Container = styled.div`
   width: 100%;
+  min-height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.25rem;
+  margin: 20px 0;
 `
 
 const Title = styled.h1`
@@ -23,7 +24,7 @@ const Title = styled.h1`
 
 const Wrapper = styled.div`
   width: 90%;
-  height: 200px;
+  min-height: fit-content;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -35,7 +36,7 @@ const Wrapper = styled.div`
 const Course = styled.div`
     width: 5rem;
     height: 5rem;
-    margin: 0.5rem 0.5rem;
+    margin: 20px 20px;
     padding: 10px 10px;
     display: flex;
     flex-direction: column;
@@ -69,7 +70,7 @@ export const CoursesComp = () => {
         <Wrapper>
           {CoursesInfo.map(course => {
             return (
-              <Course>
+              <Course key={course.id}>
                 <Icon src={course.img}/>
                 <CourseTitle>{course.name}</CourseTitle>
             </Course>

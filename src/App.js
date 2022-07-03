@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import { Footer } from './components/Footer';
 import { Topbar } from './components/Topbar';
-import Course from './pages/Course'
+import Course from './pages/Course';
 import { Home } from './pages/Home';
 import { Sidebar } from './components/Sidebar';
 import { Error } from './pages/ErrorPage/Error';
@@ -12,12 +12,12 @@ import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import { ArrowUpward } from '@mui/icons-material';
 import { Courses } from './pages/Courses';
-
+import { useAuth } from './firebase';
 import {
   Routes,
   Route,
-  Outlet
 } from "react-router-dom";
+import Resources from './pages/Resources';
 
 const Container = styled.div`
   width: 100vw;
@@ -30,18 +30,17 @@ const Container = styled.div`
 `
 
 const ButtonToTop = styled.button`
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 40px;
     position: fixed;
     cursor: pointer;
-    bottom: 20px;
-    right: 30px;
+    bottom: 10px;
+    right: 20px;
     border: none;
     outline: none;
-    background-color: #e91776;
-    color: white;
+    border: 1px solid #e91776;
+    background-color: transparent;
     border-radius: 50%;
-    font-size: 34px;
     z-index: 99;
     transition: all 0.4s ease-in-out;
     &:hover{
@@ -52,15 +51,19 @@ const ButtonToTop = styled.button`
 
 
 export default function App() {
+  const signedUser = useAuth();
+  const [user, setUser] = useState('');
+  useEffect(() => {
+    setUser(signedUser);
+  }, [signedUser]);
 
   const handleScroll = () => {
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: 'smooth'
-  })
-    
-  }
+  })}
+
   return (
     <Container>
       <Topbar />
@@ -69,8 +72,9 @@ export default function App() {
           <Route path='courses' element={<Courses />} />
           <Route path='about' element={<About />} />
           <Route path='contact' element={<Contact />} />
-          <Route path='register' element={<Register />} />
-          <Route path='login' element={<Login />} />
+          <Route path='resources' element={<Resources />} />
+          <Route path='register' element={!user ? <Register /> : () => {return}} />
+          <Route path='login' element={!user ? <Login /> : () => {return}} /> 
           <Route path="*"  element={<Error />} />
          
       </Routes>
@@ -78,7 +82,7 @@ export default function App() {
       <Footer />
       
       <ButtonToTop onClick={handleScroll} >
-        <ArrowUpward style={{color: "white", fontSize: "24px"}}/>
+        <ArrowUpward style={{color: "#e91776", fontSize: "24px"}}/>
       </ButtonToTop>
     </Container>
   )

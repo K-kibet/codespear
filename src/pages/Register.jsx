@@ -2,6 +2,7 @@ import { Google, Facebook, GitHub } from '@mui/icons-material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Bg from '../assets/register.svg';
+import { signUp, updateUser } from '../firebase';
 
 const Container = styled.div`
     position: relative;
@@ -92,9 +93,40 @@ const Button = styled.button`
     }
 `
 export const Register = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  
+  const handleRegister = (e) => {
+    e.preventDefault();
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    if(email && password) {
+        if(email.match(mailformat)){
+          if(password.match(passw)) {
+            const user = signUp(email, password);
+            if(!user.displayName) {
+              updateUser(name);
+            } else{
+              return;
+            }
+           } else {
+            alert('Wrong password format!')
+            return ; 
+           }
+         } else {
+           alert("You have entered an invalid email address!")
+           return ;
+        }
+    } else {
+      alert('enter email and password');
+      return;
+    }
+  }
   return (
     <Container>
-            <Form>
+            <Form onSubmit={handleRegister}>
                 <Title>Create Account</Title>
                 <IconContainer>
                   <Google />
@@ -104,9 +136,9 @@ export const Register = () => {
                 <Span>
                   OR
                 </Span>
-                <Input type="text" placeholder="Name"/>
-                <Input type="text" placeholder="Email"/>
-                <Input type="password" placeholder="Password"/>
+                <Input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
+                <Input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                 <Button type='submit'>SIGN UP</Button>
             </Form>
             <Span>

@@ -7,11 +7,12 @@ import JavaScript from '../assets/js.png';
 
 const Container  = styled.div`
     width: 100%;
-    height: 350px;
+    min-height: 350px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin: 20px 0;
 `
 
 const Wrapper = styled.div`
@@ -23,6 +24,9 @@ const Wrapper = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   margin: 10px 0;
+  @media screen and (max-width: 760px) {
+    justify-content: center;
+  }
 `
 
 const Title = styled.h1`
@@ -39,7 +43,7 @@ const Title = styled.h1`
 
 const Item = styled.div`
   width: 300px;
-  height: 90%;
+  height: 350px;
   border: 1px solid #aa1aaa;
   border-radius: 20px;
   display: flex;
@@ -48,7 +52,7 @@ const Item = styled.div`
   justify-content: space-between;
   padding: 20px 10px;
   background-color: #bdbaba;
-  margin-bottom: 20px;
+  margin: 20px 20px;
 `
 
 const Image = styled.img`

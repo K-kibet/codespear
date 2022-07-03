@@ -22,7 +22,7 @@ const Title = styled.h1`
 `
 
 const Text = styled.p`
-  margin-bottom: 14px;
+  margin: 14px 20px;
   font-size: 14px;
   color: #7e7e7e;
   line-height: 28px;

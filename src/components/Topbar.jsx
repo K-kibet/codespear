@@ -1,10 +1,11 @@
-import {Search } from '@mui/icons-material';
+import { Logout, Search } from '@mui/icons-material';
 import React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Image from '../assets/icon.png';
 import UserImage from '../assets/person.png';
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, NavLink, Link } from "react-router-dom";
+import { addCourse, logOut, useAuth } from '../firebase';
 
 const Container = styled.div`
     width: 100%;
@@ -18,6 +19,7 @@ const Container = styled.div`
     top: 0;
     padding: 0 20px;
     z-index: 100;
+    
 `
 
 const Icon = styled.img`
@@ -90,6 +92,40 @@ const User = styled.img`
   cursor: pointer;
 `
 
+const UserCard = styled.div`
+  width: 200px;
+  height: 250px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 10px;
+  position: fixed;
+  right: 0;
+  top: 102px;
+  z-index: 100;
+  background-color: #e2e2e2;
+  border-radius: 5px;
+`
+
+const UserCardList = styled.ul`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`
+const CardItem = styled.li`
+  text-align: start;
+  width: 100%;
+  padding: 5px 5px;
+  margin: 5px 0;
+  cursor: pointer;
+  &:hover{
+    background-color: #919090;
+  }
+`
+
 const Button = styled.button`
     width: 120px;
     height: 38px;
@@ -107,10 +143,22 @@ const Button = styled.button`
 `
 
 export const Topbar = () => {
-  const [user, setUser] = useState(false);
+  const signedUser = useAuth();
+  const [user, setUser] = useState('');
+  useEffect(() => {
+    setUser(signedUser);
+  }, [signedUser]);
+
+  const handleSignOut = () => {
+    logOut();
+  }
+
+  const handleAdd = () => {
+    addCourse();
+  }
   return (
-    <Container>
-      <Icon src={Image}/>
+    <Container >
+      <Icon src={Image} onClick={handleAdd}/>
       <SearchContainer>
         <Input type='search'/>
         <Search style={{
@@ -122,18 +170,57 @@ export const Topbar = () => {
       </SearchContainer>
       <Navigation>
         
-        <Item><Link to='/' className='link'>Home</Link></Item>
-        <Item><Link to='/courses' className='link'>Courses</Link></Item>
-        <Item><Link to='/about' className='link'>About</Link></Item>
-        <Item><Link to='/contact' className='link'>Contact</Link></Item>
+        <Item><NavLink to='/' className='link' style={({ isActive }) => {
+              return {
+                color: isActive ? "#68478D" : "",
+              };
+            }}>Home</NavLink></Item>
+        <Item><NavLink to='/courses' className='link' style={({ isActive }) => {
+              return {
+                color: isActive ? "#68478D" : "",
+              };
+            }}>Courses</NavLink></Item>
+        <Item><NavLink to='/about' className='link' style={({ isActive }) => {
+              return {
+                color: isActive ? "#68478D" : "",
+              };
+            }}>About</NavLink></Item>
+        <Item><NavLink to='/contact' className='link' style={({ isActive }) => {
+              return {
+                color: isActive ? "#68478D" : "",
+              };
+            }}>Contact</NavLink></Item>
+        <Item><NavLink to='/resources' className='link' style={({ isActive }) => {
+              return {
+                color: isActive ? "#68478D" : "",
+              };
+            }}>Resources</NavLink></Item>
       </Navigation>
-      
-        {user && <User src={UserImage}/>}
+        {user && <Button bg='#ED1D24' onClick={handleSignOut} style={{
+          position: 'fixed',
+          right: 0,
+          top: '102px',
+          zIndex: 100
+        }}>Log out <Logout  style={{
+              marginLeft: '10px',
+              
+            }}/></Button>}
+        {user && <User src={user.photoURL ? user.photoURL : UserImage} />}
         {!user && <UserContainer>
-            <Button bg='teal'><Link to='/login' className='link' >LOGIN</Link></Button>
-            <Button bg='black'><Link to='/register' className='link' >REGISTER</Link></Button>
+            <Button bg='teal'><Link to='login' className='link' >LOGIN</Link></Button>
+            <Button bg='black'><Link to='register' className='link' >REGISTER</Link></Button>
           </UserContainer>
         }
+        <UserCard >
+          <UserCardList>
+            <CardItem>Update profile</CardItem>
+            <CardItem>Dashboard</CardItem>
+            
+          </UserCardList>
+          <Button bg='#ED1D24'>Log out <Logout  style={{
+              marginLeft: '10px'
+            }}/></Button>
+        </UserCard>
       <Outlet />
     </Container>
   )

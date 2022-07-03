@@ -4,6 +4,7 @@ import { Flyer } from '../components/Flyer';
 import { CoursesComp } from '../components/CoursesComp';
 import { Newsletter } from '../components/Newsletter';
 import { Navbar } from '../components/Navbar';
+import CourseFlyer from '../components/CourseFlyer';
 
 const Container = styled.div`
   width: 100%;
@@ -16,6 +17,7 @@ export const Courses = () => {
         <Navbar />
         <Flyer />
         <CoursesComp />
+        <CourseFlyer />
         <Newsletter />
     </Container>
   )
